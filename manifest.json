@@ -1,7 +1,7 @@
 {
     "name": "Phorevr",
     "short_name": "Phorevr",
-    "start_url": ".",
+    "start_url": "https://app.phorevr.com/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#222222",
