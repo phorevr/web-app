@@ -1,11 +1,11 @@
 {
-    "name": "phorevr",
-    "short_name": "phorevr",
+    "name": "Phorevr",
+    "short_name": "Phorevr",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#222222",
-    "description": "A new Flutter project.",
+    "description": "Store you memories forever.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
