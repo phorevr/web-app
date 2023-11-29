@@ -41,7 +41,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = "3748287287";
+    var serviceWorkerVersion = "3745601618";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -71,6 +71,29 @@
     }(window.location))
   </script>
   <script>
+    const registerServiceWorker = async () => {
+      if ('serviceWorker' in navigator) {
+        try {
+          const registration = await navigator.serviceWorker.register(
+            'sw.js?v=2',
+            {
+              scope: './',
+            }
+          );
+          if (registration.installing) {
+            console.log('Service worker installing');
+          } else if (registration.waiting) {
+            console.log('Service worker installed');
+          } else if (registration.active) {
+            console.log('Service worker active');
+          }
+        } catch (error) {
+          console.error(`Registration failed with ${error}`);
+        }
+      }
+    };
+  </script>
+  <script>
     function disableNativeNavSwipe() {
       const mainC = document.querySelector('flt-glass-pane');
       mainC.addEventListener('touchstart', (e) => {
@@ -83,6 +106,7 @@
       });
     }
     window.addEventListener('load', function (ev) {
+      registerServiceWorker();
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
@@ -90,8 +114,16 @@
         },
         onEntrypointLoaded: function (engineInitializer) {
           engineInitializer.initializeEngine().then(function (appRunner) {
-            appRunner.runApp();
-            disableNativeNavSwipe();
+            const worker = new Worker('worker.js');
+            worker.onmessage = function (e) {
+              window.localStorage.setItem('bla', e.data);
+              appRunner.runApp();
+              disableNativeNavSwipe();
+            };
+            worker.postMessage({ action: 'read' });
+            navigator.serviceWorker.addEventListener("message", (event) => {
+              worker.postMessage({ action: 'write', data: event.data });
+            });
           });
         }
       });
