@@ -41,7 +41,7 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = "755928261";
+    var serviceWorkerVersion = "606814252";
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
@@ -71,29 +71,6 @@
     }(window.location))
   </script>
   <script>
-    (async () => {
-      if ('serviceWorker' in navigator) {
-        try {
-          const registration = await navigator.serviceWorker.register(
-            'sw.js?v=2',
-            {
-              scope: './',
-            }
-          );
-          if (registration.installing) {
-            console.log('Service worker installing');
-          } else if (registration.waiting) {
-            console.log('Service worker installed');
-          } else if (registration.active) {
-            console.log('Service worker active');
-          }
-        } catch (error) {
-          console.error(`Registration failed with ${error}`);
-        }
-      }
-    })();
-  </script>
-  <script>
     function disableNativeNavSwipe() {
       const mainC = document.querySelector('flt-glass-pane');
       mainC.addEventListener('touchstart', (e) => {
@@ -109,7 +86,6 @@
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
-          serviceWorkerUrl: 'sw.js',
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: function (engineInitializer) {
