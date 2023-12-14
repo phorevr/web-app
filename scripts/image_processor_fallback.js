@@ -10,6 +10,8 @@ async function resizeImageFallback(imageBase64, oWidth, oHeight, contentType) {
   imgData = await blobToImg(imgData);
   const bitmap = await createImageBitmap(imgData, { resizeWidth, resizeHeight, resizeQuality: 'pixelated' });
   const canvas = document.createElement("canvas");
+  canvas.width = resizeWidth;
+  canvas.height = resizeHeight;
   const ctx = canvas.getContext('bitmaprenderer');
   ctx.transferFromImageBitmap(bitmap);
   const resizedBase64 = canvas.toDataURL(contentType, 0.2);
