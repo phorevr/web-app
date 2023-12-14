@@ -85,6 +85,6 @@ onmessage = async (event) => {
       postMessage(await decrypt(data, key, iv));
     }
   } catch (err) {
-    postMessage({ err });
+    postMessage({ err: err.message });
   }
 };

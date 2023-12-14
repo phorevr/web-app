@@ -34,6 +34,6 @@ onmessage = async (event) => {
       postMessage(await resizeImage(imageBase64, oWidth, oHeight, contentType));
     }
   } catch (err) {
-    postMessage({ err });
+    postMessage({ err: err.message });
   }
 };
