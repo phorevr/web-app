@@ -16,7 +16,8 @@ async function resizeImageFallback(imageBase64, oWidth, oHeight, contentType) {
   ctx.drawImage(imgData, 0, 0, resizeWidth, resizeHeight);
   const resizedBase64 = canvas.toDataURL(contentType, 0.2);
   document.querySelector('body').innerHTML = '';
-  document.querySelector('body').appendChild(await blobToImg(await (await fetch(resizedBase64)).blob()));
+  canvas.style = 'width: 100%';
+  document.querySelector('body').appendChild(canvas);
   return;
   return resizedBase64.split(',')[1];
 }
