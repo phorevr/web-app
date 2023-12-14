@@ -26,6 +26,7 @@ async function blobToImg(file, width, height) {
   const img = new Image(width, height);
   img.decoding = "async";
   img.src = url;
+  img.style = 'width: 100%; object-fit: contain; object-position: top;';
   const loaded = new Promise((resolve, reject) => {
     img.onload = () => resolve();
     img.onerror = () => reject(Error("Image loading error"));
