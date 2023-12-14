@@ -22,6 +22,9 @@ function decrypt(data, key, iv) {
 };
 
 function resizeImage(imageBase64, oWidth, oHeight, contentType) {
+  if (typeof OffscreenCanvas === "undefined") {
+    return resizeImageFallback({ imageBase64, oWidth, oHeight, contentType });
+  }
   return callWorker(
     'scripts/image_processor_worker.js',
     { action: 'resize', imageBase64, oWidth, oHeight, contentType },
