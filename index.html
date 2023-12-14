@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html÷>
 
 <head>
   <!--
@@ -39,11 +39,13 @@
   <title>Phorevr</title>
   <link rel="manifest" href="manifest.json">
 
-  <script src="scripts/image_processor_fallback.js"></script>
-  <script src="scripts/workers_api.js"></script>
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = "1183964273";
+    var serviceWorkerVersion = "1557185337";
+  </script>
+  <script>
+    document.write(`<script async src='scripts/image_processor_fallback.js?${serviceWorkerVersion}'></script>`);
+    document.write(`<script async src='scripts/workers_api.js?${serviceWorkerVersion}'></script>`);
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
