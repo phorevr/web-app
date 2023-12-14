@@ -8,16 +8,16 @@ async function resizeImageFallback(imageBase64, oWidth, oHeight, contentType) {
   const base64Response = await fetch(`data:${contentType};base64,${imageBase64}`);
   let imgData = await base64Response.blob();
   imgData = await blobToImg(imgData, oWidth, oHeight);
-  document.querySelector('body').innerHTML = '';
-  document.querySelector('body').appendChild(imgData);
-  return;
-  const bitmap = await createImageBitmap(imgData, { resizeWidth, resizeHeight, resizeQuality: 'pixelated' });
+  // const bitmap = await createImageBitmap(imgData, { resizeWidth, resizeHeight, resizeQuality: 'pixelated' });
   const canvas = document.createElement("canvas");
   canvas.width = resizeWidth;
   canvas.height = resizeHeight;
   const ctx = canvas.getContext('2d');
-  ctx.drawImage(bitmap, 0, 0);
+  ctx.drawImage(imgData, 0, 0, resizeWidth, resizeHeight);
   const resizedBase64 = canvas.toDataURL(contentType, 0.2);
+  document.querySelector('body').innerHTML = '';
+  document.querySelector('body').appendChild(await blobToImg(await (await fetch(resizedBase64)).blob()));
+  return;
   return resizedBase64.split(',')[1];
 }
 
