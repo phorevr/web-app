@@ -7,7 +7,7 @@ async function resizeImageFallback(imageBase64, oWidth, oHeight, contentType) {
   const resizeHeight = parseInt(oHeight * resizeRatio);
   const base64Response = await fetch(`data:${contentType};base64,${imageBase64}`);
   let imgData = await base64Response.blob();
-  imgData = await blobToImg(imgData, resizeWidth, resizeHeight);
+  imgData = await blobToImg(imgData, oWidth, oHeight);
   const bitmap = await createImageBitmap(imgData, { resizeWidth, resizeHeight, resizeQuality: 'pixelated' });
   const canvas = document.createElement("canvas");
   canvas.width = resizeWidth;
