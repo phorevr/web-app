@@ -21,8 +21,8 @@ function decrypt(data, key, iv) {
   return callWorker('scripts/crypto_worker.js', { action: 'decrypt', data, key, iv });
 };
 
-function resizeImage(imageBase64, oWidth, oHeight, contentType) {
-  return resizeImageFallback(imageBase64, oWidth, oHeight, contentType);
+function resizeImage(imageBase64, contentType) {
+  return resizeImageFallback(imageBase64, contentType);
   if (typeof OffscreenCanvas === "undefined") {
   }
   return callWorker(
