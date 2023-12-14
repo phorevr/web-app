@@ -75,3 +75,16 @@ async function decrypt(data, key, iv) {
   const unpaddedData = tmp.slice(0, tmp.length - paddingLength);
   return arrayBufferToBinary(unpaddedData.buffer);
 };
+
+onmessage = async (event) => {
+  const { action, data, key, iv } = event.data;
+  try {
+    if (action == 'encrypt') {
+      postMessage(await encrypt(data, key, iv));
+    } else if (action == 'decrypt') {
+      postMessage(await decrypt(data, key, iv));
+    }
+  } catch (err) {
+    postMessage({ err });
+  }
+};
