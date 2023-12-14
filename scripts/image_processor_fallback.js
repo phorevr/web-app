@@ -7,7 +7,7 @@ async function resizeImageFallback(imageBase64, oWidth, oHeight, contentType) {
   const resizeHeight = parseInt(oHeight * resizeRatio);
   const base64Response = await fetch(`data:${contentType};base64,${imageBase64}`);
   let imgData = await base64Response.blob();
-  imgData = await blobToImg(imgData);
+  imgData = await blobToImg(imgData, resizeWidth, resizeHeight);
   const bitmap = await createImageBitmap(imgData, { resizeWidth, resizeHeight, resizeQuality: 'pixelated' });
   const canvas = document.createElement("canvas");
   canvas.width = resizeWidth;
@@ -18,9 +18,9 @@ async function resizeImageFallback(imageBase64, oWidth, oHeight, contentType) {
   return resizedBase64.split(',')[1];
 }
 
-async function blobToImg(file) {
+async function blobToImg(file, width, height) {
   const url = URL.createObjectURL(file);
-  const img = new Image();
+  const img = new Image(width, height);
   img.decoding = "async";
   img.src = url;
   const loaded = new Promise((resolve, reject) => {
