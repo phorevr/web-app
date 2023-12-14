@@ -22,11 +22,11 @@ function decrypt(data, key, iv) {
 };
 
 function resizeImage(imageBase64, contentType) {
-  return resizeImageFallback(imageBase64, contentType);
   if (typeof OffscreenCanvas === "undefined") {
+    return resizeImageFallback(imageBase64, contentType);
   }
   return callWorker(
     'scripts/image_processor_worker.js',
-    { action: 'resize', imageBase64, oWidth, oHeight, contentType },
+    { action: 'resize', imageBase64, contentType },
   );
 }

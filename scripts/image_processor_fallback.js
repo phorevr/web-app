@@ -17,9 +17,6 @@ async function resizeImageFallback(imageBase64, contentType) {
   const ctx = canvas.getContext('bitmaprenderer');
   ctx.transferFromImageBitmap(bitmap);
   const resizedBase64 = canvas.toDataURL(contentType, 0.2);
-  document.querySelector('body').innerHTML = '';
-  canvas.style = 'width: 100%';
-  document.querySelector('body').appendChild(canvas);
   return resizedBase64.split(',')[1];
 }
 
