@@ -42,12 +42,14 @@
 
   <script>
     // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = "2157252418";
+    const serviceWorkerVersion = "741358920";
   </script>
   <script>
     document.write('<scr' + `ipt async src='scripts/image_processor_fallback.js?v=${serviceWorkerVersion}'></sc` + 'ript>');
     document.write('<scr' + `ipt async src='scripts/workers_api.js?v=${serviceWorkerVersion}'></sc` + 'ript>');
   </script>
+  <script src="scripts/deplan-client.min.js"></script>
+  <script src="scripts/deplan_api.js"></script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
