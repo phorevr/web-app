@@ -11,3 +11,8 @@ async function signTransaction(transaction) {
   const res = await client.signTransaction({ transaction });
   return JSON.stringify(res);
 }
+
+async function getKey() {
+  const res = await window.deplan.getKey();
+  return res.response.key;
+}
